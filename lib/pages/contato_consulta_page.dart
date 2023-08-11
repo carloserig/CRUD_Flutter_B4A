@@ -3,19 +3,17 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:semana_academica/stores/contato_store.dart';
 
 class ContatoConsultaPage extends StatefulWidget {
-
-  const ContatoConsultaPage({ super.key });
+  const ContatoConsultaPage({super.key});
 
   @override
   State<ContatoConsultaPage> createState() => _ContatoConsultaPageState();
 }
 
 class _ContatoConsultaPageState extends State<ContatoConsultaPage> {
-
   final contatoStore = ContatoStore();
-  
-   @override
-   Widget build(BuildContext context) {
+
+  @override
+  Widget build(BuildContext context) {
     return FutureBuilder(
       future: contatoStore.buscarTodosContatos(),
       builder: ((context, snapshot) {
@@ -37,13 +35,47 @@ class _ContatoConsultaPageState extends State<ContatoConsultaPage> {
                           shadowColor: Colors.grey,
                           child: Container(
                             padding: EdgeInsets.all(8),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            child: Column(
                               children: [
-                                Expanded(
-                                  child: Text(contatoStore.contatosList[index].name,
-                                      style: TextStyle(fontSize: 16.0,
-                                        fontWeight: FontWeight.w700,),),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        contatoStore.contatosList[index].name,
+                                        style: TextStyle(
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        contatoStore.contatosList[index].phone,
+                                        style: TextStyle(
+                                            fontSize: 18.0,
+                                            fontStyle: FontStyle.italic),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        contatoStore.contatosList[index].email,
+                                        style: TextStyle(
+                                          fontSize: 14.0,
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
@@ -53,8 +85,10 @@ class _ContatoConsultaPageState extends State<ContatoConsultaPage> {
                           await _AlertExcluir(context, index);
                         },
                         onTap: () async {
-                          print('contato antes de ir ==> ${contatoStore.contatosList[index]}');
-                          await Navigator.of(context).pushNamed('/editar', arguments: contatoStore.contatosList[index]);
+                          print(
+                              'contato antes de ir ==> ${contatoStore.contatosList[index]}');
+                          await Navigator.of(context).pushNamed('/editar',
+                              arguments: contatoStore.contatosList[index]);
                           await contatoStore.buscarTodosContatos();
                         },
                       );
@@ -155,15 +189,14 @@ class _ContatoConsultaPageState extends State<ContatoConsultaPage> {
                 child: Observer(builder: (_) {
                   return ElevatedButton(
                     child: Padding(
-                            padding:
-                                const EdgeInsets.only(top: 20.0, bottom: 20.0),
-                            child: const Text(
-                              'Cancelar',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                      child: const Text(
+                        'Cancelar',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
                     onPressed: () async {
                       Navigator.pop(context);
                     },
