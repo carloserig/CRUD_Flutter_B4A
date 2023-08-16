@@ -3,6 +3,7 @@ import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:semana_academica/pages/contato_consulta_page.dart';
 import 'package:semana_academica/pages/contato_editar_page..dart';
 import 'package:semana_academica/pages/contato_page.dart';
+import 'package:semana_academica/pages/home_page.dart';
 
 Future<void> main() async {
 
